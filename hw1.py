@@ -15,15 +15,19 @@
 #Розрахуйте різницю між поточною датою та заданою датою.
 #Поверніть різницю у днях як ціле число.
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, timezone  
+
 
 def days_difference(date: str ) -> int :
+    try: 
+        datetime_object = datetime.strptime(date, "%Y-%m-%d").date()
+        date_now = datetime.now().date()
 
-    datetime_object = datetime.strptime(date, "%Y-%m-%d").date()
-    date_now = datetime.now().date()
+        date_diffrence = date_now - datetime_object 
 
-    date_diffrence = date_now - datetime_object 
+        return date_diffrence.days
+    
+    except ValueError:
+        return "Невірний формат дати. Використовуйте 'РРРР-ММ-ДД'."
 
-    return date_diffrence.days
-
-print(f"Різниця становить: {days_difference('2020-10-09')} днів")
+print(f"Різниця становить: {days_difference('2020-14-09')} днів")
